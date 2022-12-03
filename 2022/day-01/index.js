@@ -1,13 +1,30 @@
 const fs = require('fs');
-const input = fs.readFileSync("./input.txt", "utf8")
+const calories = fs.readFileSync('./2022/day-01/input.txt', 'utf-8').split('\r\n');
 
-console.log({input})
+// Part One
+let total =  0; 
+let highestCalories = 0; 
+let arr = [];
 
-// const input = fs.readFileSync('../day-01/input.txt', 'utf-8')
-// const input = fs.readFileSync("./input.txt", "utf8")
+for (caloriesAmount of calories) {
 
-// need to find the elves with the most calories AND how much calories is that elf carrying.
-// split the spaces into an array...
-// calculate each segment of the array.
-// find the max calories from the array.
-// get the index from the array to get the elf count.
+    if (caloriesAmount) {
+        total += Number(caloriesAmount)
+    }
+
+    if (caloriesAmount === '') {
+        highestCalories = total
+        total = 0;
+
+        arr.push(highestCalories)
+    }
+}
+
+console.log(Math.max(...arr)) // Answer
+
+
+// Part Two
+const topThreeElves = arr.sort((a, b) => b - a);
+const totalCalories = topThreeElves[0] + topThreeElves[1] + topThreeElves[2]
+
+console.log(totalCalories); // Answer
