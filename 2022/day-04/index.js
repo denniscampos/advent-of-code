@@ -29,7 +29,7 @@ for (const section of sections) {
 
 console.log({ total });
 
-part 2
+// part 2
 for (const section of sections) {
   const [first, second] = section.split(",");
   const [firstElfStart, firstElfEnd] = first.split("-");
