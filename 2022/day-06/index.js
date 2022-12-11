@@ -1,24 +1,46 @@
-const { readFile } = require("../utils");
 const fs = require("fs");
-const marker = fs.readFileSync("./sample.txt", "utf-8");
-
-// console.log(marker.length);
+const marker = fs.readFileSync("./input.txt", "utf-8");
 
 function partOne() {
-  let total = 0;
+  const lastFour = [];
+  let count = 0;
 
-  [...marker].forEach((el, i) => {
-    const string = marker.slice(i - 3, i) + el;
+  for (const character of marker) {
+    if (lastFour.length === 4) {
+      const uniqueChar = new Set(lastFour);
+      if (uniqueChar.size === 4) {
+        break;
+      }
 
-    console.log(string);
-    // console.log(total); // answer
-  });
-  // scan first four characters and compare if any of those four exist.
-  // if they don't return count...
-  // else if something exist within those four, check next _sequence_
-  // and scan the next four?
+      lastFour.shift();
+    }
+
+    lastFour.push(character);
+
+    count++;
+  }
 }
 
 partOne();
 
-// mjqjpqmgbljsphdztnvjfqwrcgsmlb
+function partTwo() {
+  const lastFour = [];
+  let count = 0;
+
+  for (const character of marker) {
+    if (lastFour.length === 14) {
+      const uniqueChar = new Set(lastFour);
+      if (uniqueChar.size === 14) {
+        break;
+      }
+
+      lastFour.shift();
+    }
+
+    lastFour.push(character);
+    count++;
+  }
+  console.log("count", count);
+}
+
+partTwo();
